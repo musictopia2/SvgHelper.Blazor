@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	  <Authors>musictopia</Authors>
 	  <Description>SVG Helpers For Blazor</Description>
-	  <Version>1.0.1</Version>
+	  <Version>2.0.1</Version>
   </PropertyGroup>
 
 
