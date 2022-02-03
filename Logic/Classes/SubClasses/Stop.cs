@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Stop
+public partial class Stop
 {
     public string Offset { get; set; } = "";
     public string Stop_Color { get; set; } = "";

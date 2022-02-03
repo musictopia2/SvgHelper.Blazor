@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class G : IParentGraphic
+public partial class G : IParentGraphic
 {
     public string ID { get; set; } = "";
     public string Transform { get; set; } = "";
@@ -8,6 +8,6 @@ public class G : IParentGraphic
     public string Fill { get; set; } = "";
     public string Mask { get; set; } = "";
     public CustomEventClass EventData { get; set; } = new CustomEventClass();
-    public BasicList<object> Children { get; set; } = new();
+    public BasicList<IStart> Children { get; set; } = new();
     public string ClipPath { get; set; } = "";
 }

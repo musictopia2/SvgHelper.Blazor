@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Path : BaseElement
+public partial class Path : BaseElement
 {
     public bool CaptureRef { get; set; } = false;
     public string D { get; set; } = "";

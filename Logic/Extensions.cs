@@ -1,4 +1,5 @@
-﻿namespace SvgHelper.Blazor.Logic;
+﻿using System.Reflection; //needs it for the populating of images.
+namespace SvgHelper.Blazor.Logic;
 public static class Extensions
 {
     public static void PopulateFullExternalImage(this Image image, Assembly assembly, string name)

@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Defs : IParentGraphic
+public partial class Defs : IParentGraphic
 {
-    public BasicList<object> Children { get; set; } = new();
+    public BasicList<IStart> Children { get; set; } = new();
 }

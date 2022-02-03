@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class RadialGradient : IParentGraphic
+public partial class RadialGradient : IParentGraphic
 {
     public string ID { get; set; } = "";
     public string CX { get; set; } = "0";
@@ -8,5 +8,5 @@ public class RadialGradient : IParentGraphic
     public string FX { get; set; } = "0";
     public string FY { get; set; } = "0";
     public string FR { get; set; } = "0";
-    public BasicList<object> Children { get; set; } = new();
+    public BasicList<IStart> Children { get; set; } = new();
 }

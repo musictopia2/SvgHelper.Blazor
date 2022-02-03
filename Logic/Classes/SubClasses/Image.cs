@@ -1,8 +1,8 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Image : BaseElement
+public partial class Image : BaseElement
 {
-    public string Href { get; set; } = "";
     public bool CaptureRef { get; set; } = false;
+    public string Href { get; set; } = "";
     public string X { get; set; } = "0";
     public string Y { get; set; } = "0";
     public string Width { get; set; } = "0";

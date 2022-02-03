@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Rect : BaseElement, IImageSize
+public partial class Rect : BaseElement, IImageSize
 {
     public bool CaptureRef { get; set; } = false;
     public string X { get; set; } = "0";

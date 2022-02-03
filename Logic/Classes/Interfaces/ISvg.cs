@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.Interfaces;
-public interface ISvg : IParentGraphic
+public interface ISvg : IParentGraphic, IStart
 {
     bool CaptureRef { get; set; }
     CustomEventClass EventData { get; set; }

@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Pattern : IParentGraphic
+public partial class Pattern : IParentGraphic
 {
     public string ID { get; set; } = "";
     public string ViewBox { get; set; } = "";
@@ -8,5 +8,5 @@ public class Pattern : IParentGraphic
     public string Height { get; set; } = "";
     public string PreserveAspectRatio { get; set; } = "";
     public string Href { get; set; } = "";
-    public BasicList<object> Children { get; set; } = new();
+    public BasicList<IStart> Children { get; set; } = new();
 }

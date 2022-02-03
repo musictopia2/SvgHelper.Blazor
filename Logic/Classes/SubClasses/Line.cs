@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Line : BaseElement
+public partial class Line : BaseElement
 {
     public bool CaptureRef { get; set; } = false;
     public string X1 { get; set; } = "0";

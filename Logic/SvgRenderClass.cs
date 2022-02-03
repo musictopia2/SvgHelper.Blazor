@@ -11,135 +11,128 @@ public class SvgRenderClass
     {
         customEvent.ActionClicked!.Invoke(customEvent.CommandParameters!, customEvent.ExtraDetails!);
     }
-    public void RenderSvgTree(BasicList<object> objects, int k, RenderTreeBuilder builder)
+    public void RenderSvgTree<T>(BasicList<T> objects, int k, RenderTreeBuilder builder)
+        where T: IStart
     {
         objects.ForEach(obj =>
         {
             RenderSvgTree(obj, k, builder);
         });
     }
-    public void RenderSvgTree<T>(T item, int k, RenderTreeBuilder builder)
+    private static (bool captureRef, string value_id, string classID) CaptureInfo<T>(T item)
+        where T : IStart
     {
-        builder.OpenRegion(k++);
-        bool captureRef = false;
+        bool capturedRef = false;
         string value_id = string.Empty;
         string classID = string.Empty;
-        if (item!.GetType().GetProperties().Any(x => x.Name == "CaptureRef"))
+        if (item is null || item.HasSpecificProperty("CaptureRef") == false)
         {
-            PropertyInfo pi_captureref = item.GetType().GetProperty("CaptureRef")!;
-            if ((bool)pi_captureref.GetValue(item, null)!)
-            {
-                if (item.GetType().GetProperties().Any(x => x.Name == "ID"))
-                {
-                    PropertyInfo pi_id = item.GetType().GetProperty("ID")!;
-                    value_id = pi_id.GetValue(item, null)!.ToString()!;
-                    captureRef = value_id != null && !string.IsNullOrEmpty(value_id.ToString());
-                }
-                if (item.GetType().GetProperties().Any(x => x.Name == "CssClass"))
-                {
-                    PropertyInfo pi_id = item.GetType().GetProperty("CssClass")!;
-                    classID = pi_id.GetValue(item, null)!.ToString()!;
-                }
-            }
+            return (capturedRef, value_id, classID);
         }
-        object _value;
+        if (item.GetCapturedRef == false)
+        {
+            return (capturedRef, value_id, classID);
+        }
+        if (item.HasSpecificProperty("ID"))
+        {
+            value_id = item.GetSpecificProperty("ID");
+            capturedRef = string.IsNullOrWhiteSpace(value_id) == false;
+        }
+        if (item.HasSpecificProperty("CssClass"))
+        {
+            classID = item.GetSpecificProperty("CssClass");
+        }
+        return (capturedRef, value_id, classID);
+    }
+    public void RenderSvgTree<T>(T item, int k, RenderTreeBuilder builder)
+        where T : IStart
+    {
+        builder.OpenRegion(k++);
+        (bool captureRef, string value_id, string classID) = CaptureInfo(item);
+        object? _value;
         string _attrName = string.Empty;
-        bool isAllowed = true;
-        string tempName = FirstAndLastCharacterToLower(item.GetType().Name);
+        bool isAllowed;
+        string tempName = FirstAndLastCharacterToLower(item!.GetType().Name);
         builder.OpenElement(k++, tempName);
-        BasicList<PropertyInfo> properties = item.GetType().GetProperties().Where(x => !x.PropertyType.Name.Contains("CustomBasicList") && x.Name != "Content" && !x.PropertyType.Name.Contains("CaptureRef")).ToBasicList();
-        PropertyInfo property = item.GetType().GetProperties().Where(x => x.Name == "Content").SingleOrDefault()!;
-        if (property != null)
+        BasicList<CustomProperty> properties = item.Properties();
+        //the content being added has to be in the source generator as well.
+        foreach (var p in properties)
         {
-            properties.Add(property);
-        }
-        foreach (PropertyInfo pi in properties)
-        {
-            if (pi.Name != "CaptureRef")
+            isAllowed = true;
+            _value = p.Value!;
+            if (p.IsDouble)
             {
-                isAllowed = true;
-                _value = pi.GetValue(item, null)!;
-                if (pi.PropertyType == typeof(double))
+                if (double.IsNaN((double)_value))
                 {
-                    if (double.IsNaN((double)_value))
-                    {
-                        isAllowed = false;
-                    }
-                    else
-                    {
-                        _value = Math.Round((double)_value, 2);
-                    }
+                    isAllowed = false;
+                }
+                else
+                {
+                    _value = Math.Round((double)_value, 2);
                 }
                 //future:
                 //since only text obviously allows 0, then instead of setting the property, it will check to see if its text
                 //if text, then allow
                 //if not text, but shows 0, then not allowed.
-                if (isAllowed)
+            }
+            if (isAllowed)
+            {
+                isAllowed = _value != null && !string.IsNullOrEmpty(_value.ToString());
+                if (isAllowed && _value!.ToString() == "0" && Allow0 == false)
                 {
-                    isAllowed = _value != null && !string.IsNullOrEmpty(_value.ToString());
-                    if (isAllowed && _value!.ToString() == "0" && Allow0 == false)
+                    isAllowed = false;
+                }
+                if (_value!.ToString() == "0" && Allow0 && item is Text == false)
+                {
+                    isAllowed = false;
+                }
+            }
+            if (isAllowed)
+            {
+                _attrName = p.AttributeName;
+                if (_value is CustomEventClass custom)
+                {
+                    if (custom.ActionClicked != null)
                     {
-                        isAllowed = false;
+                        builder.AddAttribute(1, "onclick", EventCallback.Factory.Create(this, e => ActionClicked(custom)));
                     }
-                    if (_value!.ToString() == "0" && Allow0 && item is Text == false)
+                    if (custom.StopPropagation)
                     {
-                        isAllowed = false;
+                        builder.AddEventStopPropagationAttribute(2, "onclick", true);
                     }
                 }
-                if (isAllowed)
+                else
                 {
-                    _attrName = pi.Name;
-                    if (_value is CustomEventClass custom)
+                    if (_attrName.Equals("Content"))
                     {
-                        if (custom.ActionClicked != null)
-                        {
-                            builder.AddAttribute(1, "onclick", EventCallback.Factory.Create(this, e => ActionClicked(custom)));
-                        }
-                        if (custom.StopPropagation)
-                        {
-                            builder.AddEventStopPropagationAttribute(2, "onclick", true);
-                        }
+                        builder.AddContent(3, _value!.ToString());
+                    }
+                    else if (_attrName.Equals("CssClass"))
+                    {
+                        builder.AddAttribute(4, "class", _value!.ToString());
                     }
                     else
                     {
-                        if (_attrName.Equals("Content"))
+                        if (_attrName.Contains('_'))
                         {
-                            builder.AddContent(3, _value!.ToString());
-
+                            _attrName = _attrName.Replace("_", "-");
                         }
-                        else if (_attrName.Equals("CssClass"))
-                        {
-                            builder.AddAttribute(4, "class", _value!.ToString());
-                        }
-                        else
-                        {
-                            if (_attrName.Contains('_'))
-                            {
-                                _attrName = _attrName.Replace("_", "-");
-                            }
-                            _attrName = FirstAndLastCharacterToLower(_attrName);
-                            builder.AddAttribute(4, _attrName, _value!.ToString());
-                        }
+                        _attrName = FirstAndLastCharacterToLower(_attrName);
+                        builder.AddAttribute(4, _attrName, _value!.ToString());
                     }
                 }
             }
         }
-        PropertyInfo pi_Children = item.GetType().GetProperty("Children")!;
-        if (pi_Children != null)
+        BasicList<IStart> children = item.GetChildren;
+        foreach (var c in children)
         {
-            BasicList<object>? children = pi_Children.GetValue(item) as BasicList<object>;
-            foreach (object others in children!)
-            {
-                RenderSvgTree(others, k++, builder); ;
-            }
+            RenderSvgTree(c, k++, builder);
         }
         if (captureRef)
         {
             builder.AddElementReferenceCapture(5, (elementReference) =>
             {
-
                 ElementReferences.Add(value_id!, elementReference);
-
             });
         }
         builder.CloseElement();
@@ -147,7 +140,6 @@ public class SvgRenderClass
     }
     private static string FirstAndLastCharacterToLower(string str)
     {
-
         if (string.IsNullOrWhiteSpace(str))
         {
             return str;

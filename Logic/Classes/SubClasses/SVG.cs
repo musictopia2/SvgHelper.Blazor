@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class SVG : BaseElement, IImageSize, IParentGraphic, ISvg
+public partial class SVG : BaseElement, IImageSize, IParentGraphic, ISvg
 {
     public bool CaptureRef { get; set; } = false;
     public string Width { get; set; } = "";
@@ -12,5 +12,5 @@ public class SVG : BaseElement, IImageSize, IParentGraphic, ISvg
     public string Mask { get; set; } = "";
     public string X { get; set; } = "0";
     public string Y { get; set; } = "0";
-    public BasicList<object> Children { get; set; } = new();
+    public BasicList<IStart> Children { get; set; } = new();
 }

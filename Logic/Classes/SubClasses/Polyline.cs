@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Polyline : BaseElement
+public partial class Polyline : BaseElement
 {
     public bool CaptureRef { get; set; } = false;
     public string Points { get; set; } = "";

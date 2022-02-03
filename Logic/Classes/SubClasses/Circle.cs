@@ -1,5 +1,5 @@
 ﻿namespace SvgHelper.Blazor.Logic.Classes.SubClasses;
-public class Circle : BaseElement
+public partial class Circle : BaseElement
 {
     public bool CaptureRef { get; set; } = false;
     public string CX { get; set; } = "0"; 
