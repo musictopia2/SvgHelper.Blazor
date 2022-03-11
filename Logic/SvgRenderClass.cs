@@ -138,7 +138,7 @@ public class SvgRenderClass
         builder.CloseElement();
         builder.CloseRegion();
     }
-    private static string FirstAndLastCharacterToLower(string str)
+    internal static string FirstAndLastCharacterToLower(string str)
     {
         if (string.IsNullOrWhiteSpace(str))
         {

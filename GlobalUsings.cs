@@ -13,3 +13,4 @@ global using Microsoft.AspNetCore.Components.Rendering;
 global using Microsoft.AspNetCore.Components.Web;
 global using System.Text;
 global using static CommonBasicLibraries.BasicDataSettingsAndProcesses.Constants;
+global using System.Xml.Linq;
