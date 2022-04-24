@@ -22,8 +22,12 @@ public static class Extensions
         Assembly assembly = Assembly.GetAssembly(component.GetType())!;
         image.PopulateFullExternalImage(assembly, name);
     }
-    public static void PopulateStrokesToStyles(this BaseElement element, string color = "black", float strokeWidth = 1, string fontFamily = "tahoma", double opacity = 1)
+    public static void PopulateStrokesToStyles(this BaseElement element, string color = "black", float strokeWidth = 1, string fontFamily = "default", double opacity = 1)
     {
+        if (fontFamily == "default")
+        {
+            fontFamily = TextFontHelpers.BorderedTextFontFamily; //do here.  for now, only for doing strokes to styles.
+        }
         element.Style = $"stroke: {color}; stroke-width: {strokeWidth}px; stroke-miterlimit:4; font-family:{fontFamily}; opacity: {opacity}";
     }
     public static void PopulateTextFont(this Text text, string fontFamily = "tahoma")
