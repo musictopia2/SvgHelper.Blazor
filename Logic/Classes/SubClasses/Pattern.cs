@@ -9,4 +9,5 @@ public partial class Pattern : IParentGraphic
     public string PreserveAspectRatio { get; set; } = "";
     public string Href { get; set; } = "";
     public BasicList<IStart> Children { get; set; } = new();
+    public int RenderUpTo { get; set; }
 }

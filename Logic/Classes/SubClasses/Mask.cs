@@ -3,4 +3,5 @@ public partial class Mask : IParentGraphic
 {
     public string ID { get; set; } = "";
     public BasicList<IStart> Children { get; set; } = new();
+    public int RenderUpTo { get; set; }
 }

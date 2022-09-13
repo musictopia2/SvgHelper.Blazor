@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	  <Authors>musictopia</Authors>
 	  <Description>SVG Helpers For Blazor</Description>
-	  <Version>4.0.3</Version>
+	  <Version>5.0.1</Version>
   </PropertyGroup>
 
 
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonBasicLibraries" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
+    <PackageReference Include="CommonBasicLibraries" Version="7.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
     <PackageReference Include="SvgHelper.Generator" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 

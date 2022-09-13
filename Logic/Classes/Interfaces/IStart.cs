@@ -6,6 +6,7 @@ public interface IStart
     bool GetCapturedRef { get; }
     string GetSpecificProperty(string name);
     string TypeUsed { get; }
+    int RenderUpTo { get; set; }
     BasicList<CustomProperty> Properties();
     BasicList<IStart> GetChildren { get; } //if there is none, just return 0.
 }

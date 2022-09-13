@@ -2,4 +2,5 @@
 public interface IParentGraphic
 {
     BasicList<IStart> Children { get; set; }
+    
 }

@@ -11,12 +11,12 @@ public class SvgRenderClass
     {
         customEvent.ActionClicked!.Invoke(customEvent.CommandParameters!, customEvent.ExtraDetails!);
     }
-    public void RenderSvgTree<T>(BasicList<T> objects, int k, RenderTreeBuilder builder)
+    public void RenderSvgTree<T>(BasicList<T> objects, RenderTreeBuilder builder)
         where T: IStart
     {
         objects.ForEach(obj =>
         {
-            RenderSvgTree(obj, k, builder);
+            RenderSvgTree(obj, builder);
         });
     }
     private static (bool captureRef, string value_id, string classID) CaptureInfo<T>(T item)
@@ -44,18 +44,24 @@ public class SvgRenderClass
         }
         return (capturedRef, value_id, classID);
     }
-    public void RenderSvgTree<T>(T item, int k, RenderTreeBuilder builder)
+    public void RenderSvgTree<T>(T item, RenderTreeBuilder builder)
         where T : IStart
     {
-        builder.OpenRegion(k++);
+        if (item.RenderUpTo > 0)
+        {
+            builder.OpenRegion(item.RenderUpTo);
+        }
+        else
+        {
+            builder.OpenRegion(0);
+        }
         (bool captureRef, string value_id, string classID) = CaptureInfo(item);
         object? _value;
         string _attrName = string.Empty;
         bool isAllowed;
         string tempName = FirstAndLastCharacterToLower(item!.GetType().Name);
-        builder.OpenElement(k++, tempName);
+        builder.OpenElement(1, tempName);
         BasicList<CustomProperty> properties = item.Properties();
-        //the content being added has to be in the source generator as well.
         foreach (var p in properties)
         {
             isAllowed = true;
@@ -126,7 +132,7 @@ public class SvgRenderClass
         BasicList<IStart> children = item.GetChildren;
         foreach (var c in children)
         {
-            RenderSvgTree(c, k++, builder);
+            RenderSvgTree(c, builder);
         }
         if (captureRef)
         {

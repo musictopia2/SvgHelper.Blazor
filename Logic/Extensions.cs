@@ -2,6 +2,11 @@
 namespace SvgHelper.Blazor.Logic;
 public static class Extensions
 {
+    public static void AutoIncrementElement(this IStart start, IParentContainer parent)
+    {
+        start.RenderUpTo = parent.ManuelUpTo;
+        parent.ManuelUpTo++;
+    }
     public static void PopulateFullExternalImage(this Image image, Assembly assembly, string name)
     {
         string text = assembly.ResourcesBinaryTextFromFile(name);

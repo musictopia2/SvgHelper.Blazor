@@ -5,4 +5,5 @@ public partial class Stop
     public string Stop_Color { get; set; } = "";
     public string Stop_Opacity { get; set; } = "";
     public string Style { get; set; } = "";
+    public int RenderUpTo { get; set; }
 }

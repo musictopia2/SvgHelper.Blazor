@@ -9,4 +9,5 @@ public partial class RadialGradient : IParentGraphic
     public string FY { get; set; } = "0";
     public string FR { get; set; } = "0";
     public BasicList<IStart> Children { get; set; } = new();
+    public int RenderUpTo { get; set; }
 }

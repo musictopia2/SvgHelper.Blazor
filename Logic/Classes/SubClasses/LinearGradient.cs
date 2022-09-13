@@ -8,4 +8,5 @@ public partial class LinearGradient : IParentGraphic
     public string Y2 { get; set; } = "0";
     public string GradientUnits { get; set; } = "";
     public BasicList<IStart> Children { get; set; } = new();
+    public int RenderUpTo { get; set; }
 }
