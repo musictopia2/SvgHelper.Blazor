@@ -107,7 +107,7 @@ public static class Extensions
     }
     public static string ColorUsed(this string color)
     {
-        if (color == cc.Transparent)
+        if (color == cc1.Transparent)
         {
             return "none"; //this is how svg shows as transparent
         }

@@ -7,7 +7,7 @@ global using SvgHelper.Blazor.Logic.Classes;
 global using SvgHelper.Blazor.Logic.Classes.Interfaces;
 global using SvgHelper.Blazor.Logic.Classes.SubClasses;
 global using System.Drawing;
-global using cc = CommonBasicLibraries.BasicDataSettingsAndProcesses.SColorString;
+global using cc1 = CommonBasicLibraries.BasicDataSettingsAndProcesses.SColorString;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Rendering;
 global using Microsoft.AspNetCore.Components.Web;
