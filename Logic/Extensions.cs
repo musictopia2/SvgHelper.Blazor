@@ -35,7 +35,7 @@ public static class Extensions
         }
         element.Style = $"stroke: {color}; stroke-width: {strokeWidth}px; stroke-miterlimit:4; font-family:{fontFamily}; opacity: {opacity}";
     }
-    public static void PopulateTextFont(this Text text, string fontFamily = "tahoma")
+    public static void PopulateTextFont(this Text text, string fontFamily = "Lato")
     {
         text.Style = $"font-family:{fontFamily};";
     }
