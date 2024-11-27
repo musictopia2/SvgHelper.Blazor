@@ -1,23 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Authors>musictopia</Authors>
-	  <Description>SVG Helpers For Blazor</Description>
-	  <Version>7.0.2</Version>
+    <Authors>musictopia</Authors>
+    <Description>SVG Helpers For Blazor</Description>
+    <Version>9.0.1</Version>
   </PropertyGroup>
-
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="CommonBasicLibraries" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+    <PackageReference Include="CommonBasicLibraries" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
     <PackageReference Include="SvgHelper.Generator" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
-
 </Project>
