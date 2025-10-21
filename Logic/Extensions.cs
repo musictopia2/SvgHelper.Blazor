@@ -1,4 +1,5 @@
-﻿using System.Reflection; //needs it for the populating of images.
+﻿using AssemblyHelpersLibrary.BasicExtensions;
+using System.Reflection; //needs it for the populating of images.
 namespace SvgHelper.Blazor.Logic;
 public static class Extensions
 {
