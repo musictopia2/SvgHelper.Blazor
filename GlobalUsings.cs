@@ -1,5 +1,4 @@
 ﻿global using CommonBasicLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-global using CommonBasicLibraries.AdvancedGeneralFunctionsAndProcesses.FileFunctions;
 global using CommonBasicLibraries.AdvancedGeneralFunctionsAndProcesses.Misc;
 global using CommonBasicLibraries.BasicDataSettingsAndProcesses;
 global using CommonBasicLibraries.CollectionClasses;
@@ -11,6 +10,4 @@ global using cc1 = CommonBasicLibraries.BasicDataSettingsAndProcesses.SColorStri
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Rendering;
 global using Microsoft.AspNetCore.Components.Web;
-global using System.Text;
-global using static CommonBasicLibraries.BasicDataSettingsAndProcesses.Constants;
-global using System.Xml.Linq;
+global using ff2 = CommonBasicLibraries.AdvancedGeneralFunctionsAndProcesses.FileFunctions.FileContentRegistry;

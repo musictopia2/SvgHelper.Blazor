@@ -1,6 +1,4 @@
-﻿using AssemblyHelpersLibrary.BasicExtensions;
-using System.Reflection; //needs it for the populating of images.
-namespace SvgHelper.Blazor.Logic;
+﻿namespace SvgHelper.Blazor.Logic;
 public static class Extensions
 {
     public static void AutoIncrementElement(this IStart start, IParentContainer parent)
@@ -8,25 +6,10 @@ public static class Extensions
         start.RenderUpTo = parent.ManuelUpTo;
         parent.ManuelUpTo++;
     }
-    public static void PopulateFullExternalImage(this Image image, Assembly assembly, string name)
+    public static void PopulateFullExternalImage(this Image image, string name)
     {
-        string text = assembly.ResourcesBinaryTextFromFile(name);
-        if (name.ToLower().EndsWith(".svg"))
-        {
-            image.Href = $"data:image/svg+xml;base64,{text}";
-            return;
-        }
-
-        if (name.ToLower().EndsWith(".png") == false)
-        {
-            throw new CustomBasicException("Only pngs and svgs are supported for now");
-        }
-        image.Href = $"data:image/png;base64,{text}";
-    }
-    public static void PopulateFullExternalImage(this Image image, object component, string name)
-    {
-        Assembly assembly = Assembly.GetAssembly(component.GetType())!;
-        image.PopulateFullExternalImage(assembly, name);
+        string text = ff2.GetFile(name);
+        image.Href = text;
     }
     public static void PopulateStrokesToStyles(this BaseElement element, string color = "black", float strokeWidth = 1, string fontFamily = "default", double opacity = 1)
     {

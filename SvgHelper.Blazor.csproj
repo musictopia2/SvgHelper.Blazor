@@ -14,9 +14,8 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommonBasicLibraries" Version="9.0.76" />
+    <PackageReference Include="CommonBasicLibraries" Version="9.0.78" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
-    <PackageReference Include="Musictopia.AssemblyHelpersLibrary" Version="9.0.1" />
     <PackageReference Include="SvgHelper.Generator" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
