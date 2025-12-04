@@ -16,7 +16,7 @@ public static class TriangleHelpers
     {
         BasicList<PointF> points = GetTrianglePoints(bounds);
         Polygon output = points.CreatePolygon();
-        output.Fill = customColor.ToWebColor();
+        output.Fill = customColor.ToWebColor;
         return output;
     }
 }
