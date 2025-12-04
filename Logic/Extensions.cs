@@ -251,12 +251,12 @@ public static class Extensions
     }
     extension(Line line)
     {
-        public void PopulateLine(float x1, float y1, float x2, float y2)
+        public void PopulateLine(PointF firstPoint, PointF secondPoint)
         {
-            line.X1 = x1.ToString();
-            line.Y1 = y1.ToString();
-            line.X2 = x2.ToString();
-            line.Y2 = y2.ToString();
+            line.X1 = firstPoint.X.ToString();
+            line.Y1 = firstPoint.Y.ToString();
+            line.X2 = secondPoint.X.ToString();
+            line.Y2 = secondPoint.Y.ToString();
         }
     }
 }
