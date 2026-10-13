@@ -134,13 +134,13 @@ public static class Extensions
     }
     extension (Circle circle)
     {
-        public void PopulateCircle(float x, float y, float radius, string customColor, double opacity = 1)
+        public void PopulateCircle(float x, float y, float widthHeight, string customColor, double opacity = 1)
         {
-            var value = radius + x;
+            var value = (widthHeight / 2) + x;
             circle.CX = value.ToString();
-            value = radius + y;
+            value = (widthHeight / 2) + y;
             circle.CY = value.ToString();
-            circle.R = radius.ToString();
+            circle.R = (widthHeight / 2).ToString();
             if (customColor != "")
             {
                 circle.Fill = customColor.ToWebColor;
@@ -149,7 +149,7 @@ public static class Extensions
         }
         public void PopulateCircle(RectangleF rectangle, string customColor, double opacity = 1)
         {
-            circle.PopulateCircle(rectangle.X, rectangle.Y, rectangle.Width / 2, customColor, opacity);
+            circle.PopulateCircle(rectangle.X, rectangle.Y, rectangle.Width, customColor, opacity);
         }
 
     }

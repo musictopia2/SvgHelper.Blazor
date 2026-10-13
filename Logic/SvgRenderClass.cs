@@ -83,14 +83,13 @@ public class SvgRenderClass
             }
             if (isAllowed)
             {
-                isAllowed = _value != null && !string.IsNullOrEmpty(_value.ToString());
-                if (isAllowed && _value!.ToString() == "0" && Allow0 == false)
+                string? valueText = _value?.ToString();
+
+                isAllowed = !string.IsNullOrEmpty(valueText);
+
+                if (isAllowed && valueText == "0")
                 {
-                    isAllowed = false;
-                }
-                if (_value!.ToString() == "0" && Allow0 && item is Text == false)
-                {
-                    isAllowed = false;
+                    isAllowed = Allow0 && item is Text;
                 }
             }
             if (isAllowed)
